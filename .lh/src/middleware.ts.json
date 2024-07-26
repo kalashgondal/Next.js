@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/middleware.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1722009558601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722009566943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,12 +23,12 @@\n }\n \n // See \"Matching Paths\" below to learn more\n export const config = {\n-    matcher: [\n-        '/sign-in',\n-        '/sign-up',\n-        '/',\n-        '/dashboard/:path*',\n-        '/verify/:path*'\n-    ]\n+    // matcher: [\n+    //     '/sign-in',\n+    //     '/sign-up',\n+    //     '/',\n+    //     '/dashboard/:path*',\n+    //     '/verify/:path*'\n+    // ]\n }\n"
+                },
+                {
+                    "date": 1722009999746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,31 +4,31 @@\n \n // This funcation can be marked 'async' if using 'await' inside\n export async function midleware(request: NextRequest) {\n \n-    // const token = await getToken({ req: request })\n-    // const url = request.nextUrl\n+    const token = await getToken({ req: request })\n+    const url = request.nextUrl\n \n-    // if (token &&\n-    //     (\n-    //         url.pathname.startsWith('/sign-in') ||\n-    //         url.pathname.startsWith('/sign-up') ||\n-    //         url.pathname.startsWith('/verify') ||\n-    //         url.pathname.startsWith('/')\n-    //     )\n-    // ) {\n-    //     return NextResponse.redirect(new URL('/dashboard', request.url))\n-    // }\n+    if (token &&\n+        (\n+            url.pathname.startsWith('/sign-in') ||\n+            url.pathname.startsWith('/sign-up') ||\n+            url.pathname.startsWith('/verify') ||\n+            url.pathname.startsWith('/')\n+        )\n+    ) {\n+        return NextResponse.redirect(new URL('/dashboard', request.url))\n+    }\n \n-    // return NextResponse.redirect(new URL('/home', request.url))\n+    return NextResponse.redirect(new URL('/home', request.url))\n }\n \n // See \"Matching Paths\" below to learn more\n export const config = {\n-    // matcher: [\n-    //     '/sign-in',\n-    //     '/sign-up',\n-    //     '/',\n-    //     '/dashboard/:path*',\n-    //     '/verify/:path*'\n-    // ]\n+    matcher: [\n+        '/sign-in',\n+        '/sign-up',\n+        '/',\n+        '/dashboard/:path*',\n+        '/verify/:path*'\n+    ]\n }\n"
+                },
+                {
+                    "date": 1722010022566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,11 @@\n \n     const token = await getToken({ req: request })\n     const url = request.nextUrl\n \n+    console.log('token', token);\n+    return;\n+\n     if (token &&\n         (\n             url.pathname.startsWith('/sign-in') ||\n             url.pathname.startsWith('/sign-up') ||\n"
+                },
+                {
+                    "date": 1722010059297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,8 @@\n \n     const token = await getToken({ req: request })\n     const url = request.nextUrl\n \n-    console.log('token', token);\n-    return;\n \n     if (token &&\n         (\n             url.pathname.startsWith('/sign-in') ||\n"
+                }
+            ],
+            "date": 1722009558601,
+            "name": "Commit-0",
+            "content": "import { NextRequest, NextResponse } from \"next/server\";\nexport { default } from \"next-auth/middleware\"\nimport { getToken } from \"next-auth/jwt\";\n\n// This funcation can be marked 'async' if using 'await' inside\nexport async function midleware(request: NextRequest) {\n\n    // const token = await getToken({ req: request })\n    // const url = request.nextUrl\n\n    // if (token &&\n    //     (\n    //         url.pathname.startsWith('/sign-in') ||\n    //         url.pathname.startsWith('/sign-up') ||\n    //         url.pathname.startsWith('/verify') ||\n    //         url.pathname.startsWith('/')\n    //     )\n    // ) {\n    //     return NextResponse.redirect(new URL('/dashboard', request.url))\n    // }\n\n    // return NextResponse.redirect(new URL('/home', request.url))\n}\n\n// See \"Matching Paths\" below to learn more\nexport const config = {\n    matcher: [\n        '/sign-in',\n        '/sign-up',\n        '/',\n        '/dashboard/:path*',\n        '/verify/:path*'\n    ]\n}\n"
+        }
+    ]
+}
